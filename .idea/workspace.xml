@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ce26425-e80c-40a2-9fa7-d63037792c00" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/userInterface/TakeUserInput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/Operations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/Tester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/Tester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/userInterface/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/userInterface/UserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/userInterface/UserInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/userInterface/UserInterface.class" afterDir="false" />
     </list>

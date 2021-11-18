@@ -2,11 +2,11 @@ package userInterface;
 
 import entity.Account;
 
-import java.util.Random;
 import java.util.Scanner;
 
 import static database.Operations.*;
 import static database.Utils.*;
+import static userInterface.TakeUserInput.handleUserInput;
 
 public class UserInterface {
     public static void showMainMenu() {
@@ -21,51 +21,13 @@ public class UserInterface {
                     "6. Print Statement.\n" +
                     "7. Exit.\n");
 
-            Scanner sc = new Scanner(System.in);
-            int userChoice = sc.nextInt();
-
-            switch (userChoice) {
-                case 1:
-                    handleUiForCreateAccount();
-                    break;
-
-                case 2:
-                    handleUiForBalanceEnquiry();
-                    break;
-
-                case 3:
-                    handleUiForMoneyDeposit();
-                    break;
-
-                case 4:
-                    handleUiForMoneyWithdrawal();
-                    break;
-
-                case 5:
-                    handleUiForMoneyTransfer();
-                    break;
-
-                case 6:
-                    handleUiForPrintStatement();
-                    break;
-
-                case 7:
-                    System.exit(0);
-                    break;
-
-                default:
-                    System.out.println("Invalid request!!");
-            }
+            handleUserInput();
         }
     }
 
     public static void handleUiForCreateAccount() {
-        System.out.println("\n*****Welcome to account creation portal*****\n");
-        System.out.println("Please Enter your name:");
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
-        System.out.println("Please Enter password for your account:");
-        String password = sc.nextLine();
+        String name = takeStringInput("your name");
+        String password = takeStringInput("password for your account");
         String accountNumber = getRandomAccountNumber();
         new Account(accountNumber, name, password, 0d);
     }
@@ -111,9 +73,7 @@ public class UserInterface {
     }
 
     public static boolean isAccountValid(String accountNumber) {
-        if (getListOfAllAccountNumbers().contains(accountNumber))
-            return true;
-        return false;
+        return getListOfAllAccountNumbers().contains(accountNumber);
     }
 
     public static String takeStringInput(String var) {
