@@ -15,7 +15,7 @@ public class Operations {
             theApp.thePreparedStatement.setString(2, name);
             theApp.thePreparedStatement.setDouble(3, balance);
             theApp.thePreparedStatement.setString(4, password);
-            if(theApp.thePreparedStatement.executeUpdate() > 0) {
+            if (theApp.thePreparedStatement.executeUpdate() > 0) {
                 System.out.println("Account Created Successfully.");
                 System.out.println("Please note your account number as: " + accountNumber);
             }
@@ -28,7 +28,7 @@ public class Operations {
         String qry = "select balance, name from accountDetails where accountNumber=" + accountNumber;
         try {
             ResultSet theResultSet = theApp.theStatement.executeQuery(qry);
-            while(theResultSet.next()) {
+            while (theResultSet.next()) {
                 System.out.println("Hi " +
                         theResultSet.getString("name") +
                         "!!\n" +
@@ -47,9 +47,9 @@ public class Operations {
         String qry = "update accountDetails set balance = balance + " + amountToBeAdded + " where accountNumber = " + accountNumber;
         String qry2 = "insert into transactionDetails values('" + accountNumber + "', '" + date + "', " + amountToBeAdded + ", '" + type + "')";
         try {
-            if(theApp.theStatement.executeUpdate(qry) > 0)
+            if (theApp.theStatement.executeUpdate(qry) > 0)
                 System.out.println("Balance Updated!!");
-            if(theApp.theStatement.executeUpdate(qry2) > 0)
+            if (theApp.theStatement.executeUpdate(qry2) > 0)
                 System.out.println("Database Updated!!");
         } catch (SQLException e) {
             System.out.println("Issues with money Deposit: " + e.getMessage());
@@ -61,7 +61,7 @@ public class Operations {
         try {
             ResultSet theResultSet = theApp.theStatement.executeQuery(qry);
             System.out.println("DATE\t\tAMOUNT\tTRANSACTION_TYPE");
-            while(theResultSet.next()) {
+            while (theResultSet.next()) {
                 System.out.println(theResultSet.getString("date") + "\t" +
                         theResultSet.getString("amount") + "\t\t" +
                         theResultSet.getString("type"));

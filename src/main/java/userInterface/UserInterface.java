@@ -10,7 +10,7 @@ import static database.Utils.*;
 
 public class UserInterface {
     public static void showMainMenu() {
-        while(true) {
+        while (true) {
             System.out.println("\n*****Welcome to the payment wallet*****\n");
             System.out.println("\nPlease opt from the below menu:\n" +
                     "1. Create Account.\n" +
@@ -69,119 +69,80 @@ public class UserInterface {
         String accountNumber = getRandomAccountNumber();
         new Account(accountNumber, name, password, 0d);
     }
-    
+
     public static void handleUiForBalanceEnquiry() {
-        System.out.println("\n******Welcome to balance enquiry portal******\n");
-        System.out.println("Please enter your account number:");
-        Scanner sc = new Scanner(System.in);
-        String accountNumber = sc.nextLine();
-        String password;
-        if(getListOfAllAccountNumbers().contains(accountNumber)) {
-            System.out.println("Please Enter your password:");
-            password = sc.nextLine();
-            if(isUserValid(accountNumber, password))
-                balanceEnquiry(accountNumber);
-            else
-                System.out.println("Incorrect Password!!");
-        }
-        else {
-            System.out.println("Sorry! this account doesn't exist.");
-        }
+        String accountNumber = handleUiForLogin("BALANCE ENQUIRY");
+        if (accountNumber.length() > 0)
+            balanceEnquiry(accountNumber);
     }
-    
+
     public static void handleUiForMoneyDeposit() {
-        System.out.println("\n******Welcome to Money Deposit Portal******\n");
-        System.out.println("Please enter your account number:");
-        Scanner sc = new Scanner(System.in);
-        String accountNumber = sc.nextLine();
-        String password;
-        if(getListOfAllAccountNumbers().contains(accountNumber)) {
-            System.out.println("Please Enter your password:");
-            password = sc.nextLine();
-            if(isUserValid(accountNumber, password)) {
-                System.out.println("Enter the amount you want to deposit:");
-                Double amountToBeAdded = sc.nextDouble();
-                moneyDeposit(accountNumber, amountToBeAdded);
-            }
-            else
-                System.out.println("Incorrect Password!!");
-        }
-        else {
-            System.out.println("Sorry! this account doesn't exist.");
+        String accountNumber = handleUiForLogin("MONEY DEPOSIT");
+        if (accountNumber.length() > 0) {
+            System.out.println("Enter the amount you want to deposit:");
+            Double amountToBeAdded = new Scanner(System.in).nextDouble();
+            moneyDeposit(accountNumber, amountToBeAdded);
         }
     }
 
     public static void handleUiForMoneyWithdrawal() {
-        System.out.println("\n******Welcome to Money Withdrawal Portal******\n");
-        System.out.println("Please enter your account number:");
-        Scanner sc = new Scanner(System.in);
-        String accountNumber = sc.nextLine();
-        String password;
-        if(getListOfAllAccountNumbers().contains(accountNumber)) {
-            System.out.println("Please Enter your password:");
-            password = sc.nextLine();
-            if(isUserValid(accountNumber, password)) {
-                System.out.println("Enter the amount you want to withdraw:");
-                Double amountToBeAdded = sc.nextDouble();
-                amountToBeAdded *= -1;
-                moneyDeposit(accountNumber, amountToBeAdded);
-            }
-            else
-                System.out.println("Incorrect Password!!");
-        }
-        else {
-            System.out.println("Sorry! this account doesn't exist.");
+        String accountNumber = handleUiForLogin("MONEY WITHDRAWAL");
+        if (accountNumber.length() > 0) {
+            System.out.println("Enter the amount you want to withdraw:");
+            Double amountToBeAdded = -1d * new Scanner(System.in).nextDouble();
+            moneyDeposit(accountNumber, amountToBeAdded);
         }
     }
 
     public static void handleUiForMoneyTransfer() {
-        System.out.println("\n******Welcome to Money Transfer Portal******\n");
-        System.out.println("Please enter your account number:");
-        Scanner sc = new Scanner(System.in);
-        String accountNumber = sc.nextLine();
-        String password;
-        if(getListOfAllAccountNumbers().contains(accountNumber)) {
-            System.out.println("Please Enter your password:");
-            password = sc.nextLine();
-            if(isUserValid(accountNumber, password)) {
-                System.out.println("Enter the beneficiary account number:");
-                String beneficiaryAccountNumber = sc.nextLine();
-                if(getListOfAllAccountNumbers().contains(beneficiaryAccountNumber)) {
-                    System.out.println("Enter the amount you want to transfer:");
-                    Double amountToBeTransfered = sc.nextDouble();
-                    moneyDeposit(beneficiaryAccountNumber, amountToBeTransfered);
-                    amountToBeTransfered *= -1;
-                    moneyDeposit(accountNumber, amountToBeTransfered);
-                }
-                else {
-                    System.out.println("Sorry! Beneficiary account doesn't exist.");
-                }
-            }
-            else
-                System.out.println("Incorrect Password!!");
-        }
-        else {
-            System.out.println("Sorry! this account doesn't exist.");
+        String accountNumber = handleUiForLogin("MONEY TRANSFER");
+        String beneficiaryAccount = takeStringInput("Beneficiary Account Number");
+        if (accountNumber.length() > 0 && isAccountValid(beneficiaryAccount)) {
+            Double amountToBeTransferred = takeDoubleInput("Amount You Want To Transfer");
+            moneyDeposit(beneficiaryAccount, amountToBeTransferred);
+            moneyDeposit(accountNumber, -1d * amountToBeTransferred);
         }
     }
 
     public static void handleUiForPrintStatement() {
-        System.out.println("******Account STATEMENT******");
+        String accountNumber = handleUiForLogin("ACCOUNT STATEMENT");
+        if (accountNumber.length() > 0)
+            printStatement(accountNumber);
+    }
+
+    public static boolean isAccountValid(String accountNumber) {
+        if (getListOfAllAccountNumbers().contains(accountNumber))
+            return true;
+        return false;
+    }
+
+    public static String takeStringInput(String var) {
+        System.out.println("Please enter the " + var + ":");
+        return new Scanner(System.in).nextLine();
+    }
+
+    public static Double takeDoubleInput(String var) {
+        System.out.println("Please enter the " + var + ":");
+        return new Scanner(System.in).nextDouble();
+    }
+
+    public static String handleUiForLogin(String portal) {
+        System.out.println("\n******Welcome to " + portal + " portal******\n");
         System.out.println("Please enter your account number:");
-        Scanner sc = new Scanner(System.in);
-        String accountNumber = sc.nextLine();
+        String accountNumber = new Scanner(System.in).nextLine();
         String password;
-        if(getListOfAllAccountNumbers().contains(accountNumber)) {
+
+        if (isAccountValid(accountNumber)) {
             System.out.println("Please Enter your password:");
-            password = sc.nextLine();
-            if(isUserValid(accountNumber, password)) {
-               printStatement(accountNumber);
-            }
-            else
+            password = new Scanner(System.in).nextLine();
+            if (isUserValid(accountNumber, password))
+                return accountNumber;
+            else {
                 System.out.println("Incorrect Password!!");
+                return "";
+            }
         }
-        else {
-            System.out.println("Sorry! this account doesn't exist.");
-        }
+        System.out.println("Account doesn't exist.");
+        return "";
     }
 }

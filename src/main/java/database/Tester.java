@@ -18,11 +18,11 @@ public class Tester {
 //        balanceEnquiry("234311");
 //        System.out.println(getIdPasswordMap());
 //        printStatement("000001");
-        String accountNumber = "389371";
-        LocalDate date = LocalDate.now();
-        Double amountToBeAdded = 2d;
-        String type = "debit";
-        String qry2 = "insert into transactionDetails values('" + accountNumber + "', '" + date + "', " + amountToBeAdded + ", '" + type + "')";
-        System.out.println(qry2);
+//        String accountNumber = "389371";
+//        LocalDate date = LocalDate.now();
+//        Double amountToBeAdded = 2d;
+//        String type = "debit";
+//        String qry2 = "insert into transactionDetails values('" + accountNumber + "', '" + date + "', " + amountToBeAdded + ", '" + type + "')";
+//        System.out.println(qry2);
     }
 }

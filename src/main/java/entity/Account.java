@@ -1,7 +1,5 @@
 package entity;
 
-import database.DatabaseConnection;
-
 import static database.Operations.createAccount;
 
 public class Account {
@@ -10,19 +8,12 @@ public class Account {
     private String password;
     private Double balance;
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountNumber=" + accountNumber +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                '}';
-    }
-
-
     public Account(String accountNumber, String name, String password, Double balance) {
         createAccount(accountNumber, name, password, balance);
+    }
+
+    public Account() {
+
     }
 
     public String getAccountNumber() {
@@ -55,5 +46,15 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountNumber=" + accountNumber +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", balance=" + balance +
+                '}';
     }
 }
