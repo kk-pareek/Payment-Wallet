@@ -1,15 +1,20 @@
 package entity;
 
-import static database.Operations.createAccount;
-
 public class Account {
     private String accountNumber;
     private String name;
     private String password;
     private Double balance;
+    private Double amountToBeTransacted;
+    private String beneficiaryAccountNumber;
 
-    public Account(String accountNumber, String name, String password, Double balance) {
-        createAccount(accountNumber, name, password, balance);
+    public Account(String accountNumber, String name, String password, Double balance, Double amountToBeTransacted, String beneficiaryAccountNumber) {
+        this.accountNumber = accountNumber;
+        this.name = name;
+        this.password = password;
+        this.balance = balance;
+        this.amountToBeTransacted = amountToBeTransacted;
+        this.beneficiaryAccountNumber = beneficiaryAccountNumber;
     }
 
     public Account() {
@@ -18,6 +23,14 @@ public class Account {
 
     public String getAccountNumber() {
         return accountNumber;
+    }
+
+    public String getBeneficiaryAccountNumber() {
+        return beneficiaryAccountNumber;
+    }
+
+    public void setBeneficiaryAccountNumber(String beneficiaryAccountNumber) {
+        this.beneficiaryAccountNumber = beneficiaryAccountNumber;
     }
 
     public void setAccountNumber(String accountNumber) {
@@ -40,21 +53,19 @@ public class Account {
         this.password = password;
     }
 
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountNumber=" + accountNumber +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", balance=" + balance +
-                '}';
+    public Double getAmountToBeTransacted() {
+        return amountToBeTransacted;
+    }
+
+    public void setAmountToBeTransacted(Double amountToBeTransacted) {
+        this.amountToBeTransacted = amountToBeTransacted;
     }
 }

@@ -1,9 +1,9 @@
 package app;
 
-import userInterface.UserInterface;
+import static userInterface.Main.*;
 
 public class App {
     public static void main(String[] args) {
-        UserInterface.showMainMenu();
+        handleUi();
     }
 }

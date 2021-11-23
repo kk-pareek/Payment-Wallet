@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-public class Utils {
+import static database.Operation.theApp;
+
+public class OperationUtils {
     public static HashMap<String, String> getIdPasswordMap() {
         HashMap<String, String> idPasswordMap = new HashMap<>();
         DatabaseConnection theApp = new DatabaseConnection();
@@ -55,5 +57,14 @@ public class Utils {
                 return true;
         }
         return false;
+    }
+
+    public static void executeQuery(String query) {
+        try {
+            if (theApp.theStatement.executeUpdate(query) > 0)
+                System.out.println("Done!!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
